@@ -12,6 +12,7 @@ interface Project {
   repoUrl?: string;
 }
 
+// TODO: Replace these placeholders with actual projects I have worked on. Will build a list later.
 const projects: Project[] = [
   {
     id: '1',

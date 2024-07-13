@@ -3,6 +3,7 @@ import Section from '../ui/Section';
 import LearningItem from '../ui/LearningItem';
 
 const Learning: React.FC = () => {
+  // TODO: Replace these placholders with actual classes I have taken. Will build a list later.
   const learningItems = [
     { id: 1, title: 'Advanced React Patterns', type: 'Course', platform: 'Frontend Masters', completionDate: '2024-03-15' },
     { id: 2, title: 'AWS Certified Solutions Architect', type: 'Certification', platform: 'Amazon Web Services', completionDate: '2023-11-30' },

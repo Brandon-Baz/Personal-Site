@@ -1,5 +1,6 @@
 import React from 'react';
 import { Menu, X } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 import Button from '../ui/Button';
 
 interface SidebarProps {
@@ -8,6 +9,7 @@ interface SidebarProps {
 
 const Sidebar: React.FC<SidebarProps> = ({ setActivePage }) => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const navigate = useNavigate();
 
   const navItems = [
     { id: 'home', label: 'Home' },
@@ -19,6 +21,12 @@ const Sidebar: React.FC<SidebarProps> = ({ setActivePage }) => {
     { id: 'contact', label: 'Contact' },
   ];
 
+  const handleNavClick = (id: string) => {
+    setActivePage(id);
+    navigate(`/${id}`);
+    setIsOpen(false);
+  };
+
   return (
     <>
       <Button className="menu-toggle" onClick={() => setIsOpen(!isOpen)}>
@@ -28,7 +36,7 @@ const Sidebar: React.FC<SidebarProps> = ({ setActivePage }) => {
         <ul>
           {navItems.map((item) => (
             <li key={item.id}>
-              <button onClick={() => setActivePage(item.id)} className="nav-item">
+              <button onClick={() => handleNavClick(item.id)} className="nav-item">
                 {item.label}
               </button>
             </li>

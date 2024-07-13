@@ -8,9 +8,8 @@ const BlogPostPage: React.FC = () => {
 
   useEffect(() => {
     // Fetch the blog post data based on the id
-    // This is a placeholder for your actual data fetching logic
+    // This is a placeholder. Considering adding the ability to pull from other blog sites (Medium, Dev.to, etc)
     const fetchPost = async () => {
-      // Replace this with your actual API call
       const response = await fetch(`/api/blog/${id}`);
       const data = await response.json();
       setPost(data);
