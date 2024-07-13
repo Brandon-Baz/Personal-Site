@@ -1,0 +1,90 @@
+.nav-toggle {
+    display: none;
+    font-size: 1.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .nav-link {
+    font-family: 'Bangers', cursive;
+    font-size: 1.2rem;
+    color: var(--color-primary-superhero);
+    text-decoration: none;
+    margin: 0 15px;
+    padding: 10px 15px;
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .nav-link:hover {
+    color: var(--color-highlight-superhero);
+    border-color: var(--color-highlight-superhero);
+    transform: scale(1.1);
+  }
+  
+  .theme-toggle {
+    font-family: 'Bangers', cursive;
+    font-size: 1rem;
+    color: var(--color-primary-superhero);
+    background-color: var(--color-bg-superhero);
+    border: 2px solid var(--color-border-superhero);
+    padding: 10px 15px;
+    cursor: pointer;
+    margin-left: 15px;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+  }
+  
+  .theme-toggle:hover {
+    color: var(--color-highlight-superhero);
+    border-color: var(--color-highlight-superhero);
+    transform: scale(1.1);
+  }
+  
+  @media (max-width: 768px) {
+    .nav-toggle {
+      display: block;
+    }
+  
+    .navbar {
+      display: none;
+      flex-direction: column;
+      width: 100%;
+    }
+  
+    .navbar.open {
+      display: flex;
+    }
+  
+    .nav-link {
+      margin: 10px 0;
+    }
+  }
+  
+  .theme-toggle:hover {
+    color: var(--color-highlight-superhero);
+    border-color: var(--color-highlight-superhero);
+  }
+  
+
+  .game-header {
+    background-color: var(--color-bg-superhero);
+    color: var(--color-text-superhero);
+    padding: 20px;
+    transition: all 0.3s ease;
+  }
+  
+  .game-header.villain {
+    background-color: var(--color-bg-villain);
+    color: var(--color-text-villain);
+  }
