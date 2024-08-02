@@ -3,8 +3,17 @@ import react from '@vitejs/plugin-react';
 import { NodeGlobalsPolyfillPlugin } from '@esbuild-plugins/node-globals-polyfill';
 import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfill';
 
+const conditionalPlugins = [];
+
+if (process.env.TEMPO) {
+    conditionalPlugins.push(['tempo-devtools/swc', {}]);
+}
+
+
 export default defineConfig({
-    plugins: [react()],
+    plugins: [react({
+        plugins: [...conditionalPlugins]
+    })],
     root: './',
     resolve: {
         alias: {
