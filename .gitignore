@@ -23,4 +23,6 @@ local
 dist
 .idea
 **/tempobook/dynamic/
-**/tempobook/storyboards/
+**/tempobook/storyboards/.codiumai
+*:Zone.Identifier
+.codiumai

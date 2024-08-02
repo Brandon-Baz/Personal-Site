@@ -1,78 +1,81 @@
 import React from 'react';
 import { motion} from 'framer-motion';
 import Section from '../ui/Section';
-
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  technologies: string[];
-  imageUrl: string;
-  projectUrl?: string;
-  repoUrl?: string;
-}
-
-// TODO: Replace these placeholders with actual projects I have worked on. Will build a list later.
-const projects: Project[] = [
-  {
-    id: '1',
-    title: 'Sentiment Analysis Tool',
-    description: 'Led the development of a sentiment analysis tool for social media data, improving customer insight accuracy by 30%.',
-    technologies: ['Python', 'Natural Language Processing', 'Machine Learning'],
-    imageUrl: '/images/sentiment-analysis.jpg',
-    projectUrl: 'https://example.com/sentiment-analysis',
-    repoUrl: 'https://github.com/yourusername/sentiment-analysis'
-  },
-  {
-    id: '2',
-    title: 'Personal Portfolio Website',
-    description: 'Designed and developed a responsive personal portfolio website using modern web technologies.',
-    technologies: ['React', 'TypeScript', 'CSS3', 'Framer Motion'],
-    imageUrl: '/images/portfolio-website.jpg',
-    projectUrl: 'https://your-portfolio-url.com',
-    repoUrl: 'https://github.com/yourusername/portfolio'
-  },
-  // Add more projects as needed
-];
-
-const ProjectCard: React.FC<Project> = ({ title, description, technologies, imageUrl, projectUrl, repoUrl }) => (
-  <motion.div 
-    className="project-card game-card"
-    initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.5 }}
-  >
-    <img src={imageUrl} alt={title} className="project-image" />
-    <h3 className="project-title">{title}</h3>
-    <p className="project-description">{description}</p>
-    <div className="project-technologies">
-      {technologies.map((tech, index) => (
-        <span key={index} className="tech-badge game-badge">{tech}</span>
-      ))}
-    </div>
-    <div className="project-links">
-      {projectUrl && (
-        <a href={projectUrl} target="_blank" rel="noopener noreferrer" className="game-button">View Project</a>
-      )}
-      {repoUrl && (
-        <a href={repoUrl} target="_blank" rel="noopener noreferrer" className="game-button">View Code</a>
-      )}
-    </div>
-  </motion.div>
-);
+// import ProjectCard from '../components/ProjectCard';
+// import RoguesGallery from '../components/RoguesGallery';
 
 const Projects: React.FC = () => {
-  return (
-    <div className="game-page projects-page">
-      <Section title="My Projects">
-        <div className="projects-grid">
-          {projects.map((project) => (
-            <ProjectCard key={project.id} {...project} />
-          ))}
-        </div>
-      </Section>
-    </div>
-  );
-};
+    // const { theme, content } = useTheme();
+    // const isHero = theme === ThemeType.HERO;
+    // const [selectedProject, setSelectedProject] = useState<string | null>(null);
+    //
+    // const containerVariants = {
+    //     hidden: { opacity: 0 },
+    //     visible: {
+    //         opacity: 1,
+    //         transition: { staggerChildren: 0.1 }
+    //     }
+    // };
+    return (
+        <motion.div
+            className="projects-page"
+            // variants={containerVariants}
+            // initial="hidden"
+            // animate="visible"
+        >
+            <Section title="Projects">
+                <p>Coming Soon!</p>
+            </Section>
+        </motion.div>);
+}
+
+//     return (
+//         <motion.div
+//             className={`projects-page ${isHero ? 'hero-theme' : 'villain-theme'}`}
+//             variants={containerVariants}
+//             initial="hidden"
+//             animate="visible"
+//         >
+//             <Section title={content.projects.title}>
+//                 <p>{content.projects.description}</p>
+//                 <div className="projects-grid">
+//                     {content.projects.list.map((project) => (
+//                         <ProjectCard
+//                             key={project.id}
+//                             {...project}
+//                             onClick={() => setSelectedProject(project.id)}
+//                         />
+//                     ))}
+//                 </div>
+//             </Section>
+//
+//             <Section title={isHero ? "Heroic Challenges" : "Villainous Schemes"}>
+//                 <RoguesGallery />
+//             </Section>
+//
+//             <AnimatePresence>
+//                 {selectedProject && (
+//                     <motion.div
+//                         className="project-modal"
+//                         initial={{ opacity: 0 }}
+//                         animate={{ opacity: 1 }}
+//                         exit={{ opacity: 0 }}
+//                     >
+//                         <motion.div
+//                             className="modal-content comic-panel"
+//                             initial={{ y: -50, opacity: 0 }}
+//                             animate={{ y: 0, opacity: 1 }}
+//                             exit={{ y: 50, opacity: 0 }}
+//                         >
+//                             <h2>{content.projects.list.find(p => p.id === selectedProject)?.title}</h2>
+//                             <p>{content.projects.list.find(p => p.id === selectedProject)?.fullDescription}</p>
+//                             <button onClick={() => setSelectedProject(null)}>Close</button>
+//                         </motion.div>
+//                     </motion.div>
+//                 )}
+//             </AnimatePresence>
+//         </motion.div>
+//     );
+// };
 
 export default Projects;
