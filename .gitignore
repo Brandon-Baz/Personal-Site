@@ -15,3 +15,10 @@ yarn-debug.log*
 yarn-error.log*
 .project_*
 project_*
+/src/Old_Implementation/*
+node_modules
+docs
+build
+local
+dist
+.idea

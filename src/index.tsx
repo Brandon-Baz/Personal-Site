@@ -1,19 +1,16 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import "./styles/global.css";
-import App from "./App";
-import ErrorBoundary from "./components/ErrorBoundary";
+import ReactDOM from 'react-dom/client';
+import Root from './Root';
+import {DevSupport} from "@react-buddy/ide-toolbox";
+import {ComponentPreviews, useInitial} from "./dev";
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+    document.getElementById('root') as HTMLElement
 );
-root.render(
-  <ErrorBoundary>
-    <React.StrictMode>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
-    </React.StrictMode>
-  </ErrorBoundary>
-);
+
+root.render(<DevSupport ComponentPreviews={ComponentPreviews}
+                        useInitialHook={useInitial}
+>
+    <Root/>
+</DevSupport>);
+
+export {};
