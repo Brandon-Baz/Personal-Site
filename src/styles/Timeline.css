@@ -1,0 +1,40 @@
+.timeline {
+    margin-top: 2rem;
+}
+
+.timeline-events {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+}
+
+.timeline-event {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.timeline-event .year {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.timeline-event .title {
+    text-align: center;
+}
+
+.event-details {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+
+.event-details h3 {
+    margin-bottom: 0.5rem;
+}
+
+.timeline.villain .event-details {
+    background-color: rgba(0, 0, 0, 0.3);
+}

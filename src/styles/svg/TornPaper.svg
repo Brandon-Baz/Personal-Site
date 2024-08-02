@@ -1,0 +1,10 @@
+<svg width="0" height="0">
+    <defs>
+        <filter id="torn-paper-effect">
+            <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="5" result="noise"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="20" xChannelSelector="R" yChannelSelector="G" result="displacement"/>
+            <feMorphology operator="dilate" radius="1" in="displacement" result="morph"/>
+            <feComposite in="morph" in2="SourceGraphic" operator="in"/>
+        </filter>
+    </defs>
+</svg>

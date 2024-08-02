@@ -1,36 +1,85 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import Section from '../ui/Section';
-import profilePhoto from '../assets/personal_brand_logo.png';
+import { motion } from 'framer-motion';
+import { useTheme } from '../contexts/ThemeContext';
+import HeroSection from '../components/home/HeroSection';
+import MissionPanel from '../components/home/MissionPanel';
+import SkillsShowcase from '../components/home/SkillsShowcase';
+import LatestProjects from '../components/home/LatestProjects';
+import BlogPreview from '../components/home/BlogPreview';
+import DailyLife from '../components/home/DailyLife';
+import ImpactShowcase from '../components/home/ImpactShowcase';
+import {
+    PageContainer,
+    ComicGrid,
+    ComicPanel,
+    PanelTitle
+} from '../styles/ComicLayoutStyles';
 
 const Home: React.FC = () => {
-  return (
-    <div className="game-page home-page">
-      <Section title="Code Commander: From Military Might to Digital Dominance">
-        <div className="hero-section">
-          <img src={profilePhoto} alt="Brandon Coburn" className="profile-photo" />
-          <div className="hero-content">
-            <h2 className="tagline">Battling Bugs, Building Empires, and Birthing AI - The Multiverse Adventures of Brandon Coburn!</h2>
-            <p>Hi, I'm Brandon Coburn, a software engineer with a passion for leveraging AI and modern technologies to solve complex problems. From military veteran to tech innovator, I'm on a mission to make the digital world a better place!</p>
-          </div>
-        </div>
-        <div className="comic-panel">
-          <h3>My Superpowers:</h3>
-          <ul className="superpower-list">
-            <li>Full-Stack Development</li>
-            <li>AI Integration</li>
-            <li>Problem-Solving</li>
-            <li>Team Leadership</li>
-          </ul>
-        </div>
-        <div className="home-links">
-          <Link to="/case-studies" className="game-button">View My Heroic Feats</Link>
-          <Link to="/blog" className="game-button">Read My Chronicles</Link>
-          <Link to="/contact" className="game-button">Send a Signal</Link>
-        </div>
-      </Section>
-    </div>
-  );
+    const { themeMode, isProfessionalMode } = useTheme();
+
+    return (
+        <PageContainer>
+            <ComicGrid>
+                <ComicPanel as={motion.div} initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.5 }}>
+                    <HeroSection />
+                </ComicPanel>
+
+                <ComicPanel>
+                    <PanelTitle>
+                        {isProfessionalMode
+                            ? 'Key Impacts'
+                            : themeMode === 'hero' ? 'Heroic Impact' : 'Villainous Influence'}
+                    </PanelTitle>
+                    <ImpactShowcase />
+                </ComicPanel>
+
+                <ComicPanel>
+                    <PanelTitle>
+                        {isProfessionalMode
+                            ? 'Key Skills'
+                            : themeMode === 'hero' ? 'Heroic Powers' : 'Villainous Powers'}
+                    </PanelTitle>
+                    <SkillsShowcase />
+                </ComicPanel>
+
+                {!isProfessionalMode && (
+                    <ComicPanel>
+                        <PanelTitle>{themeMode === 'hero' ? 'Current Mission' : 'Evil Scheme'}</PanelTitle>
+                        <MissionPanel />
+                    </ComicPanel>
+                )}
+
+
+                <ComicPanel>
+                    <PanelTitle>
+                        {isProfessionalMode
+                            ? 'Recent Projects'
+                            : themeMode === 'hero' ? 'Latest Heroic Feats' : 'Latest Villainous Actions'}
+                    </PanelTitle>
+                    <LatestProjects />
+                </ComicPanel>
+
+                <ComicPanel>
+                    <PanelTitle>
+                        {isProfessionalMode
+                            ? 'Recent Posts'
+                            : themeMode === 'hero' ? "Hero's Log" : "Villain's Log"}
+                    </PanelTitle>
+                    <BlogPreview />
+                </ComicPanel>
+
+                <ComicPanel className="full-width">
+                    <PanelTitle>
+                        {isProfessionalMode
+                            ? 'A Day in the Life of Brandon'
+                            : 'A Day in the Life'}
+                    </PanelTitle>
+                    <DailyLife />
+                </ComicPanel>
+            </ComicGrid>
+        </PageContainer>
+    );
 };
 
 export default Home;

@@ -1,8 +1,8 @@
 import React from 'react';
 
 interface SectionProps {
-  title: string;
-  children: React.ReactNode;
+    title: string;
+    children: React.ReactNode;
 }
 
 const Section: React.FC<SectionProps> = ({ title, children }) => {

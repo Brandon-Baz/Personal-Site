@@ -1,0 +1,38 @@
+
+@media print {
+    body {
+        font-size: 12pt;
+        line-height: 1.5;
+        color: #000;
+        background: #fff;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    .page-break {
+        page-break-before: always;
+    }
+
+    .JobMatcher, .JobComparison {
+        border: none !important;
+        box-shadow: none !important;
+    }
+
+    .MatchBar, .ComparisonChart div {
+        border: 1px solid #000;
+    }
+
+    .MatchBar::after, .ComparisonChart div div {
+        background-color: #000 !important;
+    }
+
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+
+    abbr[title]:after {
+        content: " (" attr(title) ")";
+    }
+}

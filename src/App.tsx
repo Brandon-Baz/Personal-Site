@@ -1,39 +1,73 @@
-import { Route, Routes } from "react-router-dom";
-import Header from "./layout/Header";
-import Footer from "./layout/Footer";
-import Home from "./pages/Home";
-import About from "./pages/About";
-import Career from "./pages/Career";
-import Blog from "./pages/Blog";
-import BlogPostPage from "./pages/BlogPostPage";
-import CaseStudies from "./pages/CaseStudies";
-import Learning from "./pages/Learning";
-import Contact from "./pages/Contact";
-import Projects from "./pages/Projects";
-import { ThemeProvider } from "./context/ThemeContext";
+import React, {Suspense, useEffect, useState} from 'react';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import {ErrorProvider} from './contexts/ErrorContext';
+import ErrorBoundary from './contexts/ErrorBoundary';
+import LoadingSpinner from './components/common/LoadingSpinner';
+import Footer from './components/layout/Footer';
+import Resume from './pages/Resume';
+import {DataProvider, useData} from "./contexts/DataContext";
+import {initializeBoox} from "./utils/nlpUtils";
+import DataInitializer from "./DataInitializer";
+import {AuthProvider} from "./contexts/AuthenticationContext";
+import {UserPreferencesProvider} from "./contexts/UserPreferencesContext";
+import { ThemeProvider as StyledThemeProvider } from 'styled-components';
+import {heroTheme, villainTheme} from "./styles/themes";
+import {Header} from "./components/layout";
+
+const Home = React.lazy(() => import('./pages/Home'));
+const About = React.lazy(() => import('./pages/About'));
+// const Resume = React.lazy(() => import('./pages/Resume'));
+const Portfolio = React.lazy(() => import('./pages/Portfolio'));
+const Blog = React.lazy(() => import('./pages/Blog'));
+const Services = React.lazy(() => import('./pages/Services'));
+const Contact = React.lazy(() => import('./pages/Contact'));
+
+const ResumeWithErrorBoundary = () => (
+    <ErrorBoundary>
+        <Resume/>
+    </ErrorBoundary>
+);
+
 
 const App: React.FC = () => {
-  return (
-    <ThemeProvider>
-        <div className="app-container">
-          <Header />
-          <main className="main-content">
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/career" element={<Career />} />
-              <Route path="/blog" element={<Blog />} />
-              <Route path="/blog/:id" element={<BlogPostPage />} />
-              <Route path="/case-studies" element={<CaseStudies />} />
-              <Route path="/learning" element={<Learning />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/projects" element={<Projects />} />
-            </Routes>
-          </main>
-          <Footer />
-        </div>
-    </ThemeProvider>
-  );
+    const { skills, experiences, projects, culturalValues, softSkills } = useData();
+    const [theme, ] = useState('hero');
+    const currentTheme = theme === 'hero' ? heroTheme : villainTheme;
+
+    useEffect(() => {
+        initializeBoox(skills, experiences, projects, culturalValues, softSkills);
+    }, [skills, experiences, projects, culturalValues, softSkills]);
+
+    return (
+        <StyledThemeProvider theme={currentTheme}>
+            <UserPreferencesProvider>
+                <DataProvider>
+                    <ErrorProvider>
+                        <ErrorBoundary fallback={<div>Something went wrong.</div>}>
+                            <DataInitializer />
+                            <AuthProvider>
+                                <Router>
+                                    <Header />
+                                    <Suspense fallback={<LoadingSpinner />}>
+                                        <Routes>
+                                            <Route path="/" element={<Home />} />
+                                            <Route path="/about" element={<About />} />
+                                            <Route path="/resume" element={<ResumeWithErrorBoundary />} />
+                                            <Route path="/portfolio" element={<Portfolio />} />
+                                            <Route path="/blog" element={<Blog />} />
+                                            <Route path="/services" element={<Services />} />
+                                            <Route path="/contact" element={<Contact />} />
+                                        </Routes>
+                                    </Suspense>
+                                    <Footer />
+                                </Router>
+                            </AuthProvider>
+                        </ErrorBoundary>
+                    </ErrorProvider>
+                </DataProvider>
+            </UserPreferencesProvider>
+        </StyledThemeProvider>
+    );
 };
 
 export default App;
