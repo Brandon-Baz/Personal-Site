@@ -13,6 +13,8 @@ import {UserPreferencesProvider} from "./contexts/UserPreferencesContext";
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 import {heroTheme, villainTheme} from "./styles/themes";
 import {Header} from "./components/layout";
+import { TempoDevtools } from "tempo-devtools"
+TempoDevtools.init();
 
 const Home = React.lazy(() => import('./pages/Home'));
 const About = React.lazy(() => import('./pages/About'));

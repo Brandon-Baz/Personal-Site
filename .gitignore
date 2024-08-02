@@ -22,3 +22,5 @@ build
 local
 dist
 .idea
+**/tempobook/dynamic/
+**/tempobook/storyboards/
