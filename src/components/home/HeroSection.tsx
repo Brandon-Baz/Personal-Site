@@ -59,16 +59,16 @@ const HeroSection: React.FC = () => {
                         srcSet={`${imageSrc}-small.jpg 300w, ${imageSrc}-medium.jpg 600w, ${imageSrc}-large.jpg 1200w`}
                         sizes="(max-width: 300px) 100vw, (max-width: 600px) 50vw, 33vw"
                     />
+                    {!isProfessionalMode && actionWord && (
+                        <SpeechBubble
+                            {...('speechBubble' in animations ? animations.speechBubble : {})}
+                            role="text"
+                            aria-label={`Action word: ${actionWord}`}
+                        >
+                            {actionWord}
+                        </SpeechBubble>
+                    )}
                 </HeroImage>
-                {!isProfessionalMode && actionWord && (
-                    <SpeechBubble
-                        {...('speechBubble' in animations ? animations.speechBubble : {})}
-                        role="text"
-                        aria-label={`Action word: ${actionWord}`}
-                    >
-                        {actionWord}
-                    </SpeechBubble>
-                )}
                 <CTAButton {...animations.button} onClick={handleCTAClick} aria-label={ctaText}>
                     {ctaText}
                 </CTAButton>

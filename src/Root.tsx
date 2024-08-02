@@ -1,5 +1,6 @@
 import {ThemeProvider as StyledThemeProvider} from 'styled-components';
-import {ThemeProvider as CustomThemeProvider, useTheme} from './contexts/ThemeContext';
+import {ThemeProvider as MuiThemeProvider} from '@mui/material/styles';
+import ThemeProvider, {useTheme} from './contexts/ThemeContext';
 import App from './App';
 import GlobalStyle from './styles/themes/GlobalStyle';
 import DataProvider from "./contexts/DataContext";
@@ -7,25 +8,28 @@ import {UserPreferencesProvider} from './contexts/UserPreferencesContext';
 import {heroTheme, professionalTheme, villainTheme} from "./styles/themes";
 
 const ThemedApp = () => {
-    const {theme, isProfessionalMode} = useTheme();
-    const currentTheme = isProfessionalMode ? professionalTheme : (theme === heroTheme ? heroTheme : villainTheme);
+    const {themeMode, isProfessionalMode} = useTheme();
+    const currentTheme = isProfessionalMode ? professionalTheme : (themeMode === 'hero' ? heroTheme : villainTheme);
 
     return (
+            <MuiThemeProvider theme={currentTheme}>
         <StyledThemeProvider theme={currentTheme}>
-            <UserPreferencesProvider>
-                <DataProvider>
-                    <GlobalStyle/>
-                    <App/>
-                </DataProvider>
-            </UserPreferencesProvider>
+                <GlobalStyle/>
+                <UserPreferencesProvider>
+                    <DataProvider>
+
+                        <App/>
+                    </DataProvider>
+                </UserPreferencesProvider>
         </StyledThemeProvider>
+            </MuiThemeProvider>
     );
 };
 
 const Root = () => (
-    <CustomThemeProvider>
+    <ThemeProvider>
         <ThemedApp/>
-    </CustomThemeProvider>
+    </ThemeProvider>
 );
 
 export default Root;

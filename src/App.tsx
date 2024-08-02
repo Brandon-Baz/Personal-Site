@@ -1,4 +1,4 @@
-import React, {Suspense, useEffect, useState} from 'react';
+import React, {Suspense, useEffect} from 'react';
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import {ErrorProvider} from './contexts/ErrorContext';
 import ErrorBoundary from './contexts/ErrorBoundary';
@@ -10,8 +10,7 @@ import {initializeBoox} from "./utils/nlpUtils";
 import DataInitializer from "./DataInitializer";
 import {AuthProvider} from "./contexts/AuthenticationContext";
 import {UserPreferencesProvider} from "./contexts/UserPreferencesContext";
-import { ThemeProvider as StyledThemeProvider } from 'styled-components';
-import {heroTheme, villainTheme} from "./styles/themes";
+// import {heroTheme, villainTheme} from "./styles/themes";
 import {Header} from "./components/layout";
 import { TempoDevtools } from "tempo-devtools"
 TempoDevtools.init();
@@ -33,15 +32,15 @@ const ResumeWithErrorBoundary = () => (
 
 const App: React.FC = () => {
     const { skills, experiences, projects, culturalValues, softSkills } = useData();
-    const [theme, ] = useState('hero');
-    const currentTheme = theme === 'hero' ? heroTheme : villainTheme;
+    // const [theme, ] = useState('hero');
+    // const currentTheme = theme === 'hero' ? heroTheme : villainTheme;
 
     useEffect(() => {
         initializeBoox(skills, experiences, projects, culturalValues, softSkills);
     }, [skills, experiences, projects, culturalValues, softSkills]);
 
     return (
-        <StyledThemeProvider theme={currentTheme}>
+        // <StyledThemeProvider theme={currentTheme}>
             <UserPreferencesProvider>
                 <DataProvider>
                     <ErrorProvider>
@@ -68,7 +67,7 @@ const App: React.FC = () => {
                     </ErrorProvider>
                 </DataProvider>
             </UserPreferencesProvider>
-        </StyledThemeProvider>
+        /*</StyledThemeProvider>*/
     );
 };
 

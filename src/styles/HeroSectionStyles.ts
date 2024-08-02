@@ -59,32 +59,47 @@ export const Subtitle = styled(motion.h2)`
 `;
 
 export const HeroImage = styled(motion.div)`
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
 `;
 
 export const SpeechBubble = styled(motion.div)`
     position: absolute;
-    top: 10%;
-    left: 50%;
+    top: 22%; /* Adjust this value to position the bubble vertically */
+    left: 42%;
     transform: translateX(-50%);
-    background: ${({ theme }) => theme.palette.background.paper};
-    border: 2px solid ${({ theme }) => theme.palette.primary.main};
-    border-radius: 50%;
+    width: 186px; /* Adjust the width as needed */
+    height: 167px; /* Adjust the height as needed */
+    background: url('/images/ChatBubble.png') no-repeat center center;
+    background-size: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     padding: 1rem;
+    padding-bottom: 2.75rem;
     font-family: 'Comic Sans MS', 'Comic Sans', cursive;
     font-size: 1.5rem;
     color: ${({ theme }) => theme.palette.text.primary};
-    text-align: center;
-    box-shadow: 5px 5px 0 ${({ theme }) => theme.palette.secondary.main};
-    &:before {
-        content: '';
-        position: absolute;
-        bottom: -20px;
-        left: 50%;
-        transform: translateX(-50%);
-        border-width: 20px;
-        border-style: solid;
-        border-color: ${({ theme }) => theme.palette.background.paper} transparent transparent transparent;
+    z-index: 10; /* Ensure it appears above the hero image */
+
+    @media (max-width: 1200px) {
+        top: 16%;
+    }
+
+    @media (max-width: 992px) {
+        top: 14%;
+    }
+
+    @media (max-width: 768px) {
+        top: 14%;
+    }
+
+    @media (max-width: 576px) {
+        top: 14%;
+    }
+
+    @media (max-width: 480px) {
+        top: 13%;
     }
 `;
 

@@ -1,9 +1,9 @@
 // src/contexts/ThemeContext.tsx
-import React, {createContext, useState, useContext, ReactNode, useCallback} from 'react';
-import {ThemeProvider as MuiThemeProvider} from '@mui/material/styles';
-import {ThemeProvider as StyledComponentsThemeProvider} from 'styled-components';
-import {heroTheme, villainTheme, professionalTheme} from '../styles/theme/theme';
-import {Theme} from '@mui/material/styles';
+import React, { createContext, useState, useContext, ReactNode, useCallback } from 'react';
+import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
+import { ThemeProvider as StyledComponentsThemeProvider } from 'styled-components';
+import { heroTheme, villainTheme, professionalTheme } from '../styles/theme/theme';
+import { Theme } from '@mui/material/styles';
 
 export type ThemeMode = 'hero' | 'villain' | 'professional';
 
@@ -15,53 +15,33 @@ interface ThemeContextType {
     toggleProfessionalMode: () => void;
 }
 
-const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+export const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
-export const ThemeProvider: React.FC<{ children: ReactNode }> = ({children}) => {
+const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [themeMode, setThemeMode] = useState<ThemeMode>('hero');
     const [isProfessionalMode, setIsProfessionalMode] = useState(false);
 
     const toggleTheme = useCallback(() => {
-        setThemeMode((prevMode) => {
-            switch (prevMode) {
-                case 'hero':
-                    return 'villain';
-                case 'villain':
-                    return 'hero';
-                case 'professional':
-                    return 'hero';
-                default:
-                    return 'hero';
-            }
-        });
-    }, []);
-
-    const getTheme = useCallback((mode: ThemeMode): Theme => {
-        switch (mode) {
-            case 'hero':
-                return heroTheme;
-            case 'villain':
-                return villainTheme;
-            case 'professional':
-                return professionalTheme;
-            default:
-                return heroTheme;
-        }
+        setThemeMode((prevMode) => (prevMode === 'hero' ? 'villain' : 'hero'));
     }, []);
 
     const toggleProfessionalMode = useCallback(() => {
-        setIsProfessionalMode(prev => !prev);
+        setIsProfessionalMode((prevMode) => !prevMode);
     }, []);
 
-    const theme = getTheme(themeMode);
+    const theme = isProfessionalMode
+        ? professionalTheme
+        : themeMode === 'hero'
+            ? heroTheme
+            : villainTheme;
 
-    const contextValue = React.useMemo(() => ({
+    const contextValue = {
         themeMode,
         toggleTheme,
         theme,
         isProfessionalMode,
-        toggleProfessionalMode
-    }), [themeMode, toggleTheme, theme, isProfessionalMode, toggleProfessionalMode]);
+        toggleProfessionalMode,
+    };
 
     return (
         <ThemeContext.Provider value={contextValue}>
@@ -81,3 +61,5 @@ export const useTheme = () => {
     }
     return context;
 };
+
+export default ThemeProvider;

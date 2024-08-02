@@ -1,13 +1,13 @@
+import { useEffect, useState } from "react";
+import { heroTheme } from "../styles/themes";
 import { useTheme } from "../contexts/ThemeContext";
 import { useData } from "../contexts/DataContext";
 import { ACTION_WORDS } from "../constants";
-import { useEffect, useState } from "react";
-import { heroTheme } from "../styles/theme/theme";
 import { HeroContentHook, ThemeContent } from '../types/types';
 
 export const useHeroContent = (): HeroContentHook => {
   const [isLoading, setIsLoading] = useState(true);
-  const { theme, isProfessionalMode } = useTheme();
+  const { theme, themeMode, isProfessionalMode } = useTheme();
   const { summaries } = useData();
   const isHero = theme === heroTheme;
 
@@ -26,7 +26,7 @@ export const useHeroContent = (): HeroContentHook => {
     return words[Math.floor(Math.random() * words.length)];
   };
 
-  const content: Record<string, ThemeContent> = {
+  const content: Record<typeof themeMode, ThemeContent> = {
     professional: {
       name: "Brandon Coburn",
       subtitle: "Innovative Software Engineer",

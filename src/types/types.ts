@@ -5,6 +5,7 @@ export interface ThemeContent {
     summary: string;
     imageSrc: string;
     imageAlt: string;
+
 }
 
 export interface HeroContentHook extends ThemeContent {

@@ -15,6 +15,7 @@ import {
     PanelTitle
 } from '../styles/ComicLayoutStyles';
 
+
 const Home: React.FC = () => {
     const { themeMode, isProfessionalMode } = useTheme();
 
