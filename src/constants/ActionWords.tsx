@@ -16,7 +16,7 @@ export const ACTION_IMAGES = {
         "/images/byte_buster/hero/byte_hack.png",
         "/images/byte_buster/hero/byte_overload.png",
     ],
-    [Theme.PROFESSIONAL]: [  
+    [Theme.PROFESSIONAL]: [
         // TODO: Add images for PROFESSIONAL theme
     ],
-};  
+};

@@ -11,4 +11,3 @@ export { PROJECTS } from './Projects';
 export { TESTIMONIALS } from './Testimonials';
 export { SUMMARY } from './Summary';
 export const COPYRIGHT_YEAR = 2024;
-

@@ -23,11 +23,11 @@ export const ToggleContainer = styled.button<ThemeToggleProps>`
     height: auto;
     width: 2.5rem;
     transition: all 0.3s linear;
-    
+
     &:first-child {
       transform: ${({ isHero }) => isHero ? 'translateY(0)' : 'translateY(100px)'};
     }
-    
+
     &:nth-child(2) {
       transform: ${({ isHero }) => isHero ? 'translateY(-100px)' : 'translateY(0)'};
     }
@@ -62,7 +62,7 @@ export const ToggleButton = styled.button<ThemeToggleProps>`
             transform: ${({ isHero }) => isHero ? 'translateY(-100px)' : 'translateY(0)'};
         }
     }
-    
+
     &:after {
         content: ${props => props.isHero ? '"Villain Mode"' : '"Hero Mode"'};
     }
