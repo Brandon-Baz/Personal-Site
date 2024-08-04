@@ -1,12 +1,11 @@
 import React, { useCallback } from 'react';
-import {useNavigate} from "react-router-dom";
-import { motion, AnimationProps, AnimatePresence } from 'framer-motion';
+import { useNavigate } from "react-router-dom";
+import { motion, AnimatePresence } from 'framer-motion';
 import {
     HeroContainer,
     TitleContainer,
     Title,
     Subtitle,
-    SpeechBubble,
     CTAButton,
     SummaryText,
     SummaryContainer,
@@ -15,8 +14,17 @@ import {
 import ImageWithFallback from '../common/ImageWithFallback';
 import { heroAnimations, villainAnimations, professionalAnimations } from '../../styles/theme/animation';
 import { useHeroContent } from "../../hooks/useHeroContent";
-import {useTheme} from "../../contexts/ThemeContext";
 
+const getAnimations = (themeMode: string) => {
+    switch (themeMode) {
+        case 'hero':
+            return heroAnimations;
+        case 'villain':
+            return villainAnimations;
+        default:
+            return professionalAnimations;
+    }
+};
 
 const HeroSection: React.FC = () => {
     const {
@@ -26,32 +34,31 @@ const HeroSection: React.FC = () => {
         summary,
         imageSrc,
         imageAlt,
-        actionWord,
-        isProfessionalMode,
+        themeMode,
     } = useHeroContent();
 
     const navigate = useNavigate();
-    const {themeMode} = useTheme();
-    const animations = themeMode === 'hero' ? heroAnimations :
-        themeMode === 'villain' ? villainAnimations :
-            professionalAnimations;
+    const animations = getAnimations(themeMode);
+
     const handleCTAClick = useCallback(() => {
         navigate("/resume");
-    },[navigate]);
+    }, [navigate]);
 
     return (
         <AnimatePresence mode="wait">
             <HeroContainer
                 as={motion.div}
-                initial={animations.container.initial as AnimationProps['initial']}
-                animate={animations.container.animate as AnimationProps['animate']}
-                exit={animations.container.exit as AnimationProps['exit']}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+                variants={animations.container}
+                key={themeMode}
             >
-                <TitleContainer {...animations.title}>
-                    <Title {...animations.text}>{name}</Title>
-                    <Subtitle {...animations.text}>{subtitle}</Subtitle>
+                <TitleContainer variants={animations.title}>
+                    <Title variants={animations.text}>{name}</Title>
+                    <Subtitle variants={animations.text}>{subtitle}</Subtitle>
                 </TitleContainer>
-                <HeroImage {...animations.image}>
+                <HeroImage variants={animations.image}>
                     <ImageWithFallback
                         src={imageSrc}
                         alt={imageAlt}
@@ -59,21 +66,12 @@ const HeroSection: React.FC = () => {
                         srcSet={`${imageSrc}-small.jpg 300w, ${imageSrc}-medium.jpg 600w, ${imageSrc}-large.jpg 1200w`}
                         sizes="(max-width: 300px) 100vw, (max-width: 600px) 50vw, 33vw"
                     />
-                    {!isProfessionalMode && actionWord && (
-                        <SpeechBubble
-                            {...('speechBubble' in animations ? animations.speechBubble : {})}
-                            role="text"
-                            aria-label={`Action word: ${actionWord}`}
-                        >
-                            {actionWord}
-                        </SpeechBubble>
-                    )}
                 </HeroImage>
-                <CTAButton {...animations.button} onClick={handleCTAClick} aria-label={ctaText}>
+                <CTAButton variants={animations.button} onClick={handleCTAClick} aria-label={ctaText}>
                     {ctaText}
                 </CTAButton>
-                <SummaryContainer {...animations.summary}>
-                    <SummaryText {...animations.text}>{summary}</SummaryText>
+                <SummaryContainer variants={animations.summary}>
+                    <SummaryText variants={animations.text}>{summary}</SummaryText>
                 </SummaryContainer>
             </HeroContainer>
         </AnimatePresence>

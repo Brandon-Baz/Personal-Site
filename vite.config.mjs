@@ -5,11 +5,6 @@ import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfil
 
 const conditionalPlugins = [];
 
-if (process.env.TEMPO) {
-    conditionalPlugins.push(['tempo-devtools/swc', {}]);
-}
-
-
 export default defineConfig({
     plugins: [react({
         plugins: [...conditionalPlugins]

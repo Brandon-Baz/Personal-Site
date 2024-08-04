@@ -19,7 +19,7 @@ export const heroTheme = createTheme({
     },
     text: {
       primary: '#333333',
-      secondary: '#ffffff'
+      secondary: '#666666'
     },
     error: {
       main: '#ff0000',
