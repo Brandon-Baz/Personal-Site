@@ -62,6 +62,7 @@ export const HeroImage = styled(motion.div)`
     margin-bottom: 1.5rem;
 `;
 
+// TODO: This may be removed, but I may end up moving it somewhere else instead of deleting.
 export const SpeechBubble = styled(motion.div)`
     position: absolute;
     top: 22%; /* Adjust this value to position the bubble vertically */
@@ -104,18 +105,45 @@ export const SpeechBubble = styled(motion.div)`
 `;
 
 export const CTAButton = styled(motion.button)`
-    background: ${({ theme }) => theme.palette.primary.main};
+  background: ${({ theme }) => `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`};
+  color: ${({ theme }) => theme.palette.background.paper};
+  font-family: 'Bangers', cursive;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 12px 24px;
+  border: 3px solid ${({ theme }) => theme.palette.text.primary};
+  border-radius: 8px;
+  box-shadow: 6px 6px 0px ${({ theme }) => theme.palette.text.primary};
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 100%;
+    background: ${({ theme }) => theme.palette.secondary.main};
+    transition: all 0.3s ease-in-out;
+    z-index: -1;
+  }
+
+  &:hover {
     color: ${({ theme }) => theme.palette.text.primary};
-    border: none;
-    padding: 1rem 2rem;
-    font-size: 1.25rem;
-    cursor: pointer;
-    border-radius: 5px;
-    margin-bottom: 1rem;
-    &:hover {
-        background: ${({ theme }) => theme.palette.primary.dark};
-    }
+    transform: translate(3px, 3px);
+    box-shadow: 3px 3px 0px ${({ theme }) => theme.palette.text.primary};
+  }
+
+  &:hover:before {
+    width: 100%;
+  }
 `;
+
 
 export const SummaryContainer = styled(motion.div)`
     margin-bottom: 1rem;
