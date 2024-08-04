@@ -7,10 +7,10 @@ const root = ReactDOM.createRoot(
     document.getElementById('root') as HTMLElement
 );
 
-root.render(<DevSupport ComponentPreviews={ComponentPreviews}
-                        useInitialHook={useInitial}
->
-    <Root/>
-</DevSupport>);
+root.render(
+  <DevSupport ComponentPreviews={ComponentPreviews} useInitialHook={useInitial}>
+    <Root />
+  </DevSupport>
+);
 
 export {};

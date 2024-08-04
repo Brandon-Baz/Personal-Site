@@ -9,7 +9,8 @@ export interface ThemeContent {
 }
 
 export interface HeroContentHook extends ThemeContent {
-    actionWord: string | null;
+    actionImage: string | null;
     isProfessionalMode: boolean;
     isLoading: boolean;
+    themeMode: string;
 }

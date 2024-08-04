@@ -1,7 +1,7 @@
 // src/constants/index.ts
 export { Theme } from './Themes';
 export { PageRoutes } from './PageRoutes';
-export { ACTION_WORDS } from './ActionWords';
+export { ACTION_IMAGES } from './ActionWords';
 export { CATEGORIZED_SKILLS } from "./Skills";
 export { GITHUB_URL } from './Links';
 export { LINKEDIN_URL } from './Links';

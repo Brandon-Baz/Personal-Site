@@ -64,6 +64,6 @@ export const ToggleButton = styled.button<ThemeToggleProps>`
     }
     
     &:after {
-    content: ${props => props.isHero ? '"Villain Mode"' : '"Hero Mode"'
+        content: ${props => props.isHero ? '"Villain Mode"' : '"Hero Mode"'};
     }
 `;

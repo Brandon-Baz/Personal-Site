@@ -5,6 +5,8 @@ import App from './App';
 import GlobalStyle from './styles/themes/GlobalStyle';
 import DataProvider from "./contexts/DataContext";
 import {UserPreferencesProvider} from './contexts/UserPreferencesContext';
+import {ErrorProvider} from './contexts/ErrorContext';
+import ErrorBoundary from './contexts/ErrorBoundary';
 import {heroTheme, professionalTheme, villainTheme} from "./styles/themes";
 
 const ThemedApp = () => {
@@ -12,23 +14,26 @@ const ThemedApp = () => {
     const currentTheme = isProfessionalMode ? professionalTheme : (themeMode === 'hero' ? heroTheme : villainTheme);
 
     return (
-            <MuiThemeProvider theme={currentTheme}>
-        <StyledThemeProvider theme={currentTheme}>
+        <MuiThemeProvider theme={currentTheme}>
+            <StyledThemeProvider theme={currentTheme}>
                 <GlobalStyle/>
-                <UserPreferencesProvider>
-                    <DataProvider>
-
-                        <App/>
-                    </DataProvider>
-                </UserPreferencesProvider>
-        </StyledThemeProvider>
-            </MuiThemeProvider>
+                <App/>
+            </StyledThemeProvider>
+        </MuiThemeProvider>
     );
 };
 
 const Root = () => (
     <ThemeProvider>
-        <ThemedApp/>
+        <UserPreferencesProvider>
+            <DataProvider>
+                <ErrorProvider>
+                    <ErrorBoundary fallback={<div>Something went wrong.</div>}>
+                        <ThemedApp/>
+                    </ErrorBoundary>
+                </ErrorProvider>
+            </DataProvider>
+        </UserPreferencesProvider>
     </ThemeProvider>
 );
 

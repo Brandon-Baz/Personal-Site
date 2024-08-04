@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
-import { heroTheme } from "../styles/themes";
-import { useTheme } from "../contexts/ThemeContext";
+import { ThemeMode, useTheme } from "../contexts/ThemeContext";
 import { useData } from "../contexts/DataContext";
-import { ACTION_WORDS } from "../constants";
+import { ACTION_IMAGES } from "../constants";
 import { HeroContentHook, ThemeContent } from '../types/types';
+
+const getActionImage = (mode: ThemeMode): string => {
+  const images = ACTION_IMAGES[mode];
+  return images[Math.floor(Math.random() * images.length)];
+};
 
 export const useHeroContent = (): HeroContentHook => {
   const [isLoading, setIsLoading] = useState(true);
-  const { theme, themeMode, isProfessionalMode } = useTheme();
+  const { themeMode, isProfessionalMode } = useTheme();
   const { summaries } = useData();
-  const isHero = theme === heroTheme;
 
   useEffect(() => {
     const loadData = async () => {
@@ -19,20 +22,15 @@ export const useHeroContent = (): HeroContentHook => {
     };
 
     loadData();
-  }, []);
+  }, [themeMode, isProfessionalMode]);
 
-  const getActionWord = () => {
-    const words = ACTION_WORDS[isHero ? "hero" : "villain"];
-    return words[Math.floor(Math.random() * words.length)];
-  };
-
-  const content: Record<typeof themeMode, ThemeContent> = {
+  const content: Record<ThemeMode, ThemeContent> = {
     professional: {
       name: "Brandon Coburn",
       subtitle: "Innovative Software Engineer",
       ctaText: "View My Resume",
       summary: summaries.professional,
-      imageSrc: "/images/brandon-professional.jpg",
+      imageSrc: getActionImage(themeMode),
       imageAlt: "Brandon Coburn - Professional Software Engineer",
     },
     hero: {
@@ -40,7 +38,7 @@ export const useHeroContent = (): HeroContentHook => {
       subtitle: "Vanquishing Bugs, Saving Projects!",
       ctaText: "View My Superhero Resume",
       summary: summaries.hero,
-      imageSrc: "/images/code_crusader/code-crusader.png",
+      imageSrc: getActionImage(themeMode),
       imageAlt: "Code Crusader - Software Development Superhero",
     },
     villain: {
@@ -48,22 +46,18 @@ export const useHeroContent = (): HeroContentHook => {
       subtitle: "Unleashing Digital Chaos!",
       ctaText: "View My Supervillain Resume",
       summary: summaries.villain,
-      imageSrc: "/images/byte_buster/byte-buster.png",
+      imageSrc: getActionImage(themeMode),
       imageAlt: "Byte Buster - Software Development Super-villain",
     },
   };
 
-  const mode = isProfessionalMode
-      ? "professional"
-      : isHero
-          ? "hero"
-          : "villain";
-  const currentContent = content[mode];
+  const currentContent = content[isProfessionalMode ? 'professional' : themeMode];
 
   return {
     ...currentContent,
-    actionWord: isProfessionalMode ? null : getActionWord(),
+    actionImage: getActionImage(themeMode),
     isProfessionalMode,
     isLoading,
+    themeMode,
   };
 };
