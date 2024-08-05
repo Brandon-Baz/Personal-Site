@@ -46,7 +46,7 @@ export const ComicPanel = styled.div`
     left: 0;
     right: 0;
     bottom: 0;
-    background: 
+    background:
       linear-gradient(to right, #fff 3px, transparent 3px) 0 0,
       linear-gradient(to right, #fff 3px, transparent 3px) 0 100%,
       linear-gradient(to left, #fff 3px, transparent 3px) 100% 0,
