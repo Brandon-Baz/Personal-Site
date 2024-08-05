@@ -1,81 +1,59 @@
-import React, { useCallback } from 'react';
+import React, { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from "framer-motion";
 import {
-    HeroContainer,
-    TitleContainer,
-    Title,
-    Subtitle,
-    CTAButton,
-    SummaryText,
-    SummaryContainer,
-    HeroImage,
-} from '../../styles/HeroSectionStyles';
-import ImageWithFallback from '../common/ImageWithFallback';
-import { heroAnimations, villainAnimations, professionalAnimations } from '../../styles/theme/animation';
+  HeroContainer,
+  SummaryContainer,
+  SummaryText,
+  AnimatedCTAButton,
+  AnimatedHeroImage,
+} from "../../styles/HeroSectionStyles";
+import ImageWithFallback from "../common/ImageWithFallback";
 import { useHeroContent } from "../../hooks/useHeroContent";
-
-const getAnimations = (themeMode: string) => {
-    switch (themeMode) {
-        case 'hero':
-            return heroAnimations;
-        case 'villain':
-            return villainAnimations;
-        default:
-            return professionalAnimations;
-    }
-};
+import getAnimations from "../../utils/GetAnimations";
 
 const HeroSection: React.FC = () => {
-    const {
-        name,
-        subtitle,
-        ctaText,
-        summary,
-        imageSrc,
-        imageAlt,
-        themeMode,
-    } = useHeroContent();
+  const { ctaText, imageSrc, imageAlt, summary, themeMode, isProfessionalMode } = useHeroContent();
 
-    const navigate = useNavigate();
-    const animations = getAnimations(themeMode);
+  const navigate = useNavigate();
+  const animations = getAnimations(isProfessionalMode, themeMode);
 
-    const handleCTAClick = useCallback(() => {
-        navigate("/resume");
-    }, [navigate]);
+  const handleCTAClick = useCallback(() => {
+    navigate("/resume");
+  }, [navigate]);
 
-    return (
-        <AnimatePresence mode="wait">
-            <HeroContainer
+  return (
+    <AnimatePresence mode="wait">
+      <HeroContainer
                 as={motion.div}
+                variants={animations.container}
                 initial="initial"
                 animate="animate"
                 exit="exit"
-                variants={animations.container}
-                key={themeMode}
+                key={`${themeMode}-${isProfessionalMode}`}
             >
-                <TitleContainer variants={animations.title}>
-                    <Title variants={animations.text}>{name}</Title>
-                    <Subtitle variants={animations.text}>{subtitle}</Subtitle>
-                </TitleContainer>
-                <HeroImage variants={animations.image}>
-                    <ImageWithFallback
-                        src={imageSrc}
-                        alt={imageAlt}
-                        fallbackSrc="/images/fallback-hero.jpg"
-                        srcSet={`${imageSrc}-small.jpg 300w, ${imageSrc}-medium.jpg 600w, ${imageSrc}-large.jpg 1200w`}
-                        sizes="(max-width: 300px) 100vw, (max-width: 600px) 50vw, 33vw"
-                    />
-                </HeroImage>
-                <CTAButton variants={animations.button} onClick={handleCTAClick} aria-label={ctaText}>
-                    {ctaText}
-                </CTAButton>
-                <SummaryContainer variants={animations.summary}>
-                    <SummaryText variants={animations.text}>{summary}</SummaryText>
-                </SummaryContainer>
-            </HeroContainer>
-        </AnimatePresence>
-    );
+        <AnimatedHeroImage variants={animations.image}>
+          <ImageWithFallback
+            src={imageSrc}
+            alt={imageAlt}
+            fallbackSrc="/images/fallback-hero.jpg"
+            srcSet={`${imageSrc}-small.jpg 300w, ${imageSrc}-medium.jpg 600w, ${imageSrc}-large.jpg 1200w`}
+            sizes="(max-width: 300px) 100vw, (max-width: 600px) 50vw, 33vw"
+          />
+        </AnimatedHeroImage>
+        <AnimatedCTAButton
+          variants={animations.button}
+          onClick={handleCTAClick}
+          aria-label={ctaText}
+        >
+          {ctaText}
+        </AnimatedCTAButton>
+        <SummaryContainer variants={animations.element}>
+          <SummaryText variants={animations.text}>{summary}</SummaryText>
+        </SummaryContainer>
+      </HeroContainer>
+    </AnimatePresence>
+  );
 };
 
 export default HeroSection;

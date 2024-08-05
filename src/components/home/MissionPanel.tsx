@@ -1,29 +1,31 @@
+import React from 'react';
 import { motion } from 'framer-motion';
 import { useData } from '../../contexts/DataContext';
 import { useTheme } from '../../contexts/ThemeContext';
+import { useHeroContent } from "../../hooks/useHeroContent";
 import {
     MissionContainer,
     MissionTitle,
     MissionDescription,
+    MissionContext,
     ProgressBar,
     ProgressFill,
     ProgressLabel
 } from '../../styles/MissionPanelStyles';
-import {heroTheme} from "../../styles/themes";
+import { heroTheme } from "../../styles/themes";
 
-
-const MissionPanel = () => {
+const MissionPanel: React.FC = () => {
     const { missions } = useData();
     const { theme, isProfessionalMode } = useTheme();
+    const { summary } = useHeroContent();
 
     if (!missions || missions.length === 0) {
         return <div>No missions available</div>;
     }
 
-    // const currentMission = missions[0]; // Assume the first mission is the current one
-
     return (
         <MissionContainer>
+            {/* <MissionContext>{summary.slice(50, 150)}...</MissionContext> */}
             {missions.map((mission, index) => (
                 <div key={mission.name}>
                     <motion.div
@@ -49,7 +51,8 @@ const MissionPanel = () => {
                             <ProgressLabel>{mission.progress}% Complete</ProgressLabel>
                         </ProgressBar>
                     </motion.div>
-                </div>))}
+                </div>
+            ))}
         </MissionContainer>
     );
 };
