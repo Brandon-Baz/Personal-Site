@@ -12,7 +12,7 @@ const getAnimations = (isProfessionalMode: boolean, themeMode: string) => {
             text: professionalTextVariants
         };
     }
-    return themeMode === 'hero' 
+    return themeMode === 'hero'
         ? {
             container: heroContainerVariants,
             element: heroElementVariants,
