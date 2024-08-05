@@ -21,7 +21,7 @@ const GlobalStyle = createGlobalStyle`
         color: ${({ theme }) => theme.palette.primary.main};
         margin-bottom: ${({ theme }) => theme.spacing(2)};
     }
-    
+
     p {
         margin-bottom: ${({ theme }) => theme.spacing(2)};
     }
