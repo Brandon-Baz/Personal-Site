@@ -9,6 +9,8 @@ export const FooterContainer = styled.footer`
     padding: 2rem 0;
     position: relative;
     overflow: hidden;
+    border-top: 5px solid ${({ theme }) => theme.palette.secondary.main};
+    margin-top: 2rem;
 `;
 
 export const FooterContent = styled.div`
@@ -39,10 +41,11 @@ export const FooterLink = styled(Link)`
     text-decoration: none;
     font-family: var(--font-body);
     font-size: 1rem;
-    transition: color 0.3s ease;
+    transition: all 0.3s ease;
 
     &:hover {
-        color: ${props => props.theme.palette.secondary.main};
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
 `;
 

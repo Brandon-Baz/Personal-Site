@@ -35,6 +35,13 @@ export const ImpactIcon = styled.div`
     margin-right: 1rem;
 `;
 
+export const ImpactIntro = styled.p`
+    font-family: 'Comic Neue', cursive;
+    font-size: 1rem;
+    color: ${({ theme }) => theme.palette.text.secondary};
+    margin-bottom: 1rem;
+`;
+
 export const ImpactTitle = styled.h3`
     font-family: 'Comic Neue', cursive;
     color: ${({ theme }) => theme.palette.text.primary};

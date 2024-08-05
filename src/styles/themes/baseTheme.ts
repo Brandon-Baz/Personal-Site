@@ -7,10 +7,15 @@ export const baseTheme = {
       h2: {
         fontFamily: "'Bangers', cursive",
       },
+      body1: {
+        fontSize: '1rem',
+        lineHeight: 1.5,
+      },
     },
     shape: {
       borderRadius: 10,
     },
+    spacing: (factor: number) => `${factor * 8}px`,
     transitions: {
       duration: {
         shortest: 150,

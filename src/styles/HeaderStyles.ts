@@ -12,7 +12,9 @@ export const HeaderContainer = styled.header`
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    position: relative;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
     z-index: 1000;
 
     &::after {
@@ -70,10 +72,11 @@ export const NavItem = styled(motion.a)`
     text-decoration: none;
     padding: 0.5rem 1rem;
     border-radius: 5px;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.3s ease;
 
     &:hover {
-        background-color: ${({ theme }) => theme.palette.secondary.main};;
+        background-color: ${({ theme }) => theme.palette.secondary.main};
+        transform: scale(1.05);
     }
 `;
 
