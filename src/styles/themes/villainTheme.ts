@@ -6,11 +6,11 @@ export const villainTheme = createTheme({
   palette: {
     mode: 'dark',
     primary: {
-      main: '#8B008B',
+      main: '#6a0dad',
         dark: '#4B004B',
     },
     secondary: {
-      main: '#00CED1',
+      main: '#00ced1',
         dark: '#008080',
     },
     background: {
@@ -42,6 +42,24 @@ export const villainTheme = createTheme({
           color: 'white',
           padding: '0 30px',
           boxShadow: '0 3px 5px 2px rgba(0, 206, 209, .3)',
+          transition: 'all 0.3s ease-in-out',
+          '&:hover': {
+            transform: 'translateY(-2px)',
+            boxShadow: '0 5px 7px 2px rgba(0, 206, 209, .5)',
+          },
+        },
+      },
+    },
+    MuiCard: {
+      styleOverrides: {
+        root: {
+          borderRadius: '15px',
+          boxShadow: '0 8px 16px 0 rgba(0,0,0,0.3)',
+          transition: 'all 0.3s ease-in-out',
+          '&:hover': {
+            transform: 'translateY(-5px)',
+            boxShadow: '0 12px 20px 0 rgba(0,0,0,0.4)',
+          },
         },
       },
     },

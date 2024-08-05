@@ -36,6 +36,11 @@ export const heroTheme = createTheme({
           color: 'white',
           height: 48,
           padding: '0 30px',
+          transition: 'all 0.3s ease-in-out',
+          '&:hover': {
+            transform: 'translateY(-2px)',
+            boxShadow: '0 5px 7px 2px rgba(255, 105, 135, .5)',
+          },
         },
       },
     },
@@ -43,7 +48,12 @@ export const heroTheme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: '15px',
-          boxShadow: '0 8px 16px 0 rgba(0,0,0,0.2)',
+          boxShadow: '0 8px 16px 0 rgba(0,0,0,0.1)',
+          transition: 'all 0.3s ease-in-out',
+          '&:hover': {
+            transform: 'translateY(-5px)',
+            boxShadow: '0 12px 20px 0 rgba(0,0,0,0.15)',
+          },
         },
       },
     },

@@ -13,6 +13,13 @@ export const SkillItem = styled.div`
     gap: 1rem;
 `;
 
+export const SkillsIntro = styled.p`
+    font-family: 'Comic Neue', cursive;
+    font-size: 1rem;
+    color: ${({ theme }) => theme.palette.text.secondary};
+    margin-bottom: 1rem;
+`;
+
 export const SkillIcon = styled.div`
     font-size: 2rem;
     color: ${({theme}) => theme.palette.primary.main};

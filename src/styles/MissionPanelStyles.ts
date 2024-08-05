@@ -19,6 +19,13 @@ export const MissionTitle = styled.h3`
     text-shadow: 2px 2px 0 ${({ theme }) => theme.palette.secondary.main};
 `;
 
+export const MissionContext = styled.p`
+    font-family: 'Comic Neue', cursive;
+    font-size: 1rem;
+    color: ${({ theme }) => theme.palette.text.secondary};
+    margin-bottom: 1rem;
+`;
+
 export const MissionDescription = styled.p`
     font-family: 'Comic Neue', cursive;
     font-size: 1rem;
