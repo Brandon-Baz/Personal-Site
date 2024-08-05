@@ -11,11 +11,11 @@ import {
     ImpactMetricStyle
 } from '../../styles/ImpactShowcaseStyle';
 import { ImpactMetric } from '../../types/data';
-import {heroTheme} from "../../styles/themes/heroTheme";
+import { heroTheme } from "../../styles/themes/heroTheme";
 
 const ImpactShowcase: React.FC = () => {
-    const {theme, isProfessionalMode} = useTheme();
-    const {impactMetrics} = useData();
+    const { theme, isProfessionalMode } = useTheme();
+    const { impactMetrics } = useData();
 
     const getDescription = (impact: ImpactMetric) => {
         if (isProfessionalMode) return impact.description;
