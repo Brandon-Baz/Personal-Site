@@ -57,7 +57,7 @@ export const ComicGrid = styled.div<{ $isComicBook: boolean }>`
   & > .full-width {
     grid-column: 1 / -1;
   }
-  
+
   ${({ $isComicBook }) => $isComicBook && `
     gap: 20px;
     background-color: #FFFFFF;
