@@ -12,7 +12,7 @@ export const professionalTheme = createTheme({
     },
     background: {
       default: '#FFFFFF',
-      paper: '#F3F6F8'
+      paper: 'https://www.transparenttextures.com/patterns/cardboard.png',
     },
     text: {
       primary: '#283E4A',

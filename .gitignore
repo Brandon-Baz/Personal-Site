@@ -17,6 +17,8 @@ project_*
 /build
 /local
 /dist
+/tmp
+appmap.*
 
 npm-debug.log*
 yarn-debug.log*

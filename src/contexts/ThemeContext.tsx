@@ -1,65 +1,86 @@
 // src/contexts/ThemeContext.tsx
-import React, { createContext, useState, useContext, ReactNode, useCallback } from 'react';
-import { ThemeProvider as MuiThemeProvider } from '@mui/material/styles';
-import { ThemeProvider as StyledComponentsThemeProvider } from 'styled-components';
-import { heroTheme, villainTheme, professionalTheme } from '../styles/theme/theme';
-import { Theme } from '@mui/material/styles';
+import React, {
+  createContext,
+  useState,
+  useContext,
+  ReactNode,
+  useCallback,
+} from "react";
+import { ThemeProvider as MuiThemeProvider } from "@mui/material/styles";
+import { ThemeProvider as StyledComponentsThemeProvider } from "styled-components";
+import {
+  heroTheme,
+  villainTheme,
+  professionalTheme,
+} from "../styles/theme/theme";
+import { Theme } from "@mui/material/styles";
 
-export type ThemeMode = 'hero' | 'villain' | 'professional';
+export type ThemeMode = "hero" | "villain" | "professional";
 
 interface ThemeContextType {
-    themeMode: ThemeMode;
-    toggleTheme: () => void;
-    theme: Theme;
-    isProfessionalMode: boolean;
-    toggleProfessionalMode: () => void;
+  themeMode: ThemeMode;
+  theme: Theme;
+  isProfessionalMode: boolean;
+  isComicBookMode: boolean;
+  toggleTheme: () => void;
+  toggleProfessionalMode: () => void;
+  toggleComicBookMode: () => void;
 }
 
-export const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
+export const ThemeContext = createContext<ThemeContextType | undefined>(
+  undefined
+);
 
 const ThemeProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
-    const [themeMode, setThemeMode] = useState<ThemeMode>('hero');
-    const [isProfessionalMode, setIsProfessionalMode] = useState(false);
+  const [themeMode, setThemeMode] = useState<ThemeMode>("hero");
+  const [isProfessionalMode, setIsProfessionalMode] = useState(false);
+  const [isComicBookMode, setIsComicBookMode] = useState(false);
 
-    const toggleTheme = useCallback(() => {
-        setThemeMode((prevMode) => (prevMode === 'hero' ? 'villain' : 'hero'));
-    }, []);
+  const toggleTheme = useCallback(() => {
+    setThemeMode((prevMode) => (prevMode === "hero" ? "villain" : "hero"));
+  }, []);
 
-    const toggleProfessionalMode = useCallback(() => {
-        setIsProfessionalMode((prevMode) => !prevMode);
-    }, []);
+  const toggleProfessionalMode = useCallback(() => {
+    setIsProfessionalMode((prevMode) => !prevMode);
+  }, []);
 
-    const theme = isProfessionalMode
-        ? professionalTheme
-        : themeMode === 'hero'
-            ? heroTheme
-            : villainTheme;
+  const toggleComicBookMode = useCallback(() => {
+    setIsComicBookMode((prev) => !prev);
+  }, []);
 
-    const contextValue = {
-        themeMode,
-        toggleTheme,
-        theme,
-        isProfessionalMode,
-        toggleProfessionalMode,
-    };
+  const theme = isProfessionalMode
+    ? professionalTheme
+    : themeMode === "hero"
+    ? heroTheme
+    : villainTheme;
 
-    return (
-        <ThemeContext.Provider value={contextValue}>
-            <MuiThemeProvider theme={theme}>
-                <StyledComponentsThemeProvider theme={theme}>
-                    {children}
-                </StyledComponentsThemeProvider>
-            </MuiThemeProvider>
-        </ThemeContext.Provider>
-    );
+  const contextValue = {
+    themeMode,
+    theme,
+    isProfessionalMode,
+    isComicBookMode,
+    toggleTheme,
+    toggleProfessionalMode,
+    toggleComicBookMode,
+  };
+
+  return (
+    <ThemeContext.Provider value={contextValue}>
+      <MuiThemeProvider theme={theme}>
+        <StyledComponentsThemeProvider theme={theme}>
+          {children}
+        </StyledComponentsThemeProvider>
+      </MuiThemeProvider>
+    </ThemeContext.Provider>
+  );
 };
 
 export const useTheme = () => {
-    const context = useContext(ThemeContext);
-    if (context === undefined) {
-        throw new Error('useTheme must be used within a ThemeProvider');
-    }
-    return context;
+  const context = useContext(ThemeContext);
+  if (context === undefined) {
+    throw new Error("useTheme must be used within a ThemeProvider");
+  }
+  return context;
 };
 
 export default ThemeProvider;

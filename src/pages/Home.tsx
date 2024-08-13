@@ -19,28 +19,33 @@ import { useHeroContent } from "../hooks/useHeroContent";
 import getAnimations from "../utils/GetAnimations";
 
 const Home: React.FC = () => {
-  const { themeMode, isProfessionalMode } = useTheme();
+  const { themeMode, isProfessionalMode, isComicBookMode } = useTheme();
   const animations = getAnimations(isProfessionalMode, themeMode);
   const { name, subtitle } = useHeroContent();
 
   return (
-    <PageContainer>
+    <PageContainer $isComicBook={isComicBookMode}>
       <TitleContainer variants={animations.container}>
-        <Title variants={animations.element}>{name}</Title>
-        <Subtitle variants={animations.text}>{subtitle}</Subtitle>
+        <Title variants={animations.element} $isComicBook={isComicBookMode}>
+          {name}
+        </Title>
+        <Subtitle variants={animations.text} $isComicBook={isComicBookMode}>
+          {subtitle}
+        </Subtitle>
       </TitleContainer>
-      <ComicGrid>
+      <ComicGrid $isComicBook={isComicBookMode}>
         <ComicPanel
           as={motion.div}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
+          $isComicBook={isComicBookMode}
         >
           <HeroSection />
         </ComicPanel>
 
-        <ComicPanel>
-          <PanelTitle>
+        <ComicPanel $isComicBook={isComicBookMode}>
+          <PanelTitle $isComicBook={isComicBookMode}>
             {isProfessionalMode
               ? "Key Impacts"
               : themeMode === "hero"
@@ -50,8 +55,8 @@ const Home: React.FC = () => {
           <ImpactShowcase />
         </ComicPanel>
 
-        <ComicPanel>
-          <PanelTitle>
+        <ComicPanel $isComicBook={isComicBookMode}>
+          <PanelTitle $isComicBook={isComicBookMode}>
             {isProfessionalMode
               ? "Key Skills"
               : themeMode === "hero"
@@ -61,17 +66,19 @@ const Home: React.FC = () => {
           <SkillsShowcase />
         </ComicPanel>
 
-        {!isProfessionalMode && (
-          <ComicPanel>
-            <PanelTitle>
-              {themeMode === "hero" ? "Current Mission" : "Evil Scheme"}
-            </PanelTitle>
-            <MissionPanel />
-          </ComicPanel>
-        )}
+        <ComicPanel $isComicBook={isComicBookMode}>
+          <PanelTitle $isComicBook={isComicBookMode}>
+            {isProfessionalMode
+              ? "Current Tasks"
+              : themeMode === "hero"
+              ? "Heroic Mission"
+              : "Evil Scheme"}
+          </PanelTitle>
+          <MissionPanel />
+        </ComicPanel>
 
-        <ComicPanel>
-          <PanelTitle>
+        <ComicPanel $isComicBook={isComicBookMode}>
+          <PanelTitle $isComicBook={isComicBookMode}>
             {isProfessionalMode
               ? "Recent Projects"
               : themeMode === "hero"
@@ -81,8 +88,8 @@ const Home: React.FC = () => {
           <LatestProjects />
         </ComicPanel>
 
-        <ComicPanel>
-          <PanelTitle>
+        <ComicPanel $isComicBook={isComicBookMode}>
+          <PanelTitle $isComicBook={isComicBookMode}>
             {isProfessionalMode
               ? "Recent Posts"
               : themeMode === "hero"
@@ -92,8 +99,8 @@ const Home: React.FC = () => {
           <BlogPreview />
         </ComicPanel>
 
-        <ComicPanel className="full-width">
-          <PanelTitle>
+        <ComicPanel className="full-width" $isComicBook={isComicBookMode}>
+          <PanelTitle $isComicBook={isComicBookMode}>
             {isProfessionalMode
               ? "A Day in the Life of Brandon"
               : "A Day in the Life"}

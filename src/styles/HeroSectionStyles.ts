@@ -35,7 +35,17 @@ export const HeroContainer = styled(motion.div)`
   padding: ${({ theme }) => theme.spacing(4)};
   position: relative;
   overflow: hidden;
-  background: ${({ theme }) => theme.palette.background.default};
+  background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+  background-color: ${({ theme }) => theme.palette.background.paper};
+
+
+  &::before {
+    background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+  }
+
+  &::after {
+    background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
+  }
 `;
 
 export const TitleContainer = styled(motion.div)`
@@ -43,7 +53,7 @@ export const TitleContainer = styled(motion.div)`
   margin-bottom: 1rem;
 `;
 
-export const Title = styled(motion.h1)`
+export const Title = styled(motion.h1)<{ $isComicBook: boolean }>`
   font-size: ${({ theme }) => theme.typography.h1.fontSize};
   color: ${({ theme }) => theme.palette.primary.main};
   margin-bottom: ${({ theme }) => theme.spacing(2)};
@@ -51,7 +61,7 @@ export const Title = styled(motion.h1)`
   ${responsiveStyles}
 `;
 
-export const Subtitle = styled(motion.h2)`
+export const Subtitle = styled(motion.h2)<{ $isComicBook: boolean }>`
   font-size: ${({ theme }) => theme.typography.h2.fontSize};
   color: ${({ theme }) => theme.palette.text.primary};
   margin-bottom: ${({ theme }) => theme.spacing(3)};
@@ -155,6 +165,7 @@ export const AnimatedCTAButton = styled(motion.button)`
 
 export const SummaryContainer = styled(motion.div)`
   background: ${({ theme }) => theme.palette.background.paper};
+  background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
   border: 3px solid ${({ theme }) => theme.palette.primary.main};
   border-radius: 10px;
   padding: ${({ theme }) => theme.spacing(2)};
@@ -172,9 +183,14 @@ export const SummaryContainer = styled(motion.div)`
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url('/images/halftone-texture.png');
+    background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
     opacity: 0.1;
     z-index: 0;
+  }
+
+  &::after {
+    background-color: ${({ theme }) => theme.palette.background.paper};
+    background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
   }
 `;
 
