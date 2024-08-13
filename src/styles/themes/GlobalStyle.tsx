@@ -1,5 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 import { Helmet } from "react-helmet";
+import { comicBookOverlay } from "../ComicBookOverlay";
+
 
 const GlobalStyle = createGlobalStyle`
     * {
@@ -10,7 +12,8 @@ const GlobalStyle = createGlobalStyle`
 
     body {
         font-family: 'Comic Neue', cursive;
-        background-color: ${({ theme }) => theme.palette.background.default};
+        background-color: ${({ theme }) => theme.palette.background.paper};
+        background-image: url("/images/background/light_paper.jpg");
         color: ${({ theme }) => theme.palette.text.primary};
         line-height: 1.6;
         font-size: 16px;
@@ -35,6 +38,8 @@ const GlobalStyle = createGlobalStyle`
             text-decoration: underline;
         }
     }
+
+    ${({ theme }) => theme.isComicBookMode && comicBookOverlay}
 `;
 
 const GlobalStyleWrapper = () => (

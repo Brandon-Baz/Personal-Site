@@ -1,67 +1,88 @@
+import { motion } from 'framer-motion';
 import styled from 'styled-components';
 
-export const PageContainer = styled.div`
+export const PageContainer = styled.div<{ $isComicBook: boolean }>`
   max-width: 1200px;
   margin: 0 auto;
   padding: ${({ theme }) => theme.spacing(4)};
-  background-color: ${({ theme }) => theme.palette.background.paper};
-  background-image: url('/public/images/background/light_paper.jpg');
-  background-size: cover;
+  background-color: ${({ theme }) => theme.palette.background.default};
+  background-image: url("/images/background/light_paper.jpg");
+  background-size: auto;
   background-position: center;
-  background-repeat: no-repeat;
+  background-repeat: repeat;
   min-height: 100vh;
+
+  ${({ $isComicBook }) => $isComicBook && `
+    background-image: url("/images/background/comic_dots.png");
+    background-repeat: repeat;
+  `}
 `;
 
-export const ComicGrid = styled.div`
+export const TitleContainer = styled(motion.div)`
+  text-align: center;
+  margin-bottom: 1rem;
+`;
+
+export const Title = styled(motion.h1)<{ $isComicBook: boolean }>`
+  font-family: 'Bangers', cursive;
+  font-size: 3rem;
+  color: ${({ theme }) => theme.palette.primary.main};
+  margin-bottom: 0.5rem;
+  text-shadow: 2px 2px 0 ${({ theme }) => theme.palette.secondary.main};
+  ${({ $isComicBook }) => $isComicBook && `
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 3px 3px 0 #000000;
+  `}
+`;
+
+export const Subtitle = styled(motion.h2)<{ $isComicBook: boolean }>`
+  font-family: 'Comic Neue', sans-serif;
+  font-size: 1.5rem;
+  color: ${({ theme }) => theme.palette.text.primary};
+  font-weight: bold;
+  ${({ $isComicBook }) => $isComicBook && `
+    font-weight: 700;
+    text-transform: uppercase;
+  `}
+`;
+
+export const ComicGrid = styled.div<{ $isComicBook: boolean }>`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: ${({ theme }) => theme.spacing(4)};
+  gap: 1rem;
+  padding: 1rem;
   margin-top: ${({ theme }) => theme.spacing(4)};
 
   & > .full-width {
     grid-column: 1 / -1;
   }
-`;
+  
+  ${({ $isComicBook }) => $isComicBook && `
+    gap: 20px;
+    background-color: #FFFFFF;
+    padding: 20px;
+    border: 5px solid #000000;
+    box-shadow: 10px 10px 0 rgba(0,0,0,0.8);
+  `}
+  `;
 
-export const ComicPanel = styled.div`
+export const ComicPanel = styled.div<{ $isComicBook: boolean }>`
+  background-color: ${({ theme }) => theme.palette.background.paper};
+  background-image: url('https://www.transparenttextures.com/patterns/paper-fibers.png');
   background-color: ${({ theme }) => theme.palette.background.paper};
   border: 3px solid ${({ theme }) => theme.palette.primary.main};
-  background-blend-mode: overlay;
-  border-radius: ${({ theme }) => theme.shape.borderRadius}px;
-  padding: ${({ theme }) => theme.spacing(3)};
-  box-shadow: 5px 5px 0 ${({ theme }) => theme.palette.secondary.main};
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease-in-out;
-
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 8px 8px 0 ${({ theme }) => theme.palette.secondary.main};
-  }
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background:
-      linear-gradient(to right, #fff 3px, transparent 3px) 0 0,
-      linear-gradient(to right, #fff 3px, transparent 3px) 0 100%,
-      linear-gradient(to left, #fff 3px, transparent 3px) 100% 0,
-      linear-gradient(to left, #fff 3px, transparent 3px) 100% 100%,
-      linear-gradient(to bottom, #fff 3px, transparent 3px) 0 0,
-      linear-gradient(to bottom, #fff 3px, transparent 3px) 100% 0,
-      linear-gradient(to top, #fff 3px, transparent 3px) 0 100%,
-      linear-gradient(to top, #fff 3px, transparent 3px) 100% 100%;
-    background-repeat: no-repeat;
-    background-size: 20px 20px;
-    pointer-events: none;
-  }
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  ${({ $isComicBook }) => $isComicBook && `
+    border: 3px solid #000000;
+    box-shadow: 5px 5px 0 #000000;
+    transform: rotate(-1deg);
+  `}
 `;
 
-export const PanelTitle = styled.h2`
+export const PanelTitle = styled.h2<{ $isComicBook: boolean }>`
   font-family: 'Bangers', cursive;
   font-size: 1.8rem;
   color: ${({ theme }) => theme.palette.primary.main};

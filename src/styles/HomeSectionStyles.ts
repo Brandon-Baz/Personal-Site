@@ -1,87 +1,76 @@
 import styled from 'styled-components';
 import { motion } from 'framer-motion';
 
+export const PageContainer = styled.div<{ $isComicBook: boolean }>`
+  ${({ $isComicBook }) => $isComicBook && `
+    background-image: url("/images/background/comic_dots.png");
+    background-repeat: repeat;
+  `}
+`;
+
 export const TitleContainer = styled(motion.div)`
   text-align: center;
   margin-bottom: 1rem;
 `;
 
-export const Title = styled(motion.h1)`
+export const Title = styled(motion.h1)<{ $isComicBook: boolean }>`
   font-family: 'Bangers', cursive;
   font-size: 3rem;
   color: ${({ theme }) => theme.palette.primary.main};
   margin-bottom: 0.5rem;
   text-shadow: 2px 2px 0 ${({ theme }) => theme.palette.secondary.main};
+  ${({ $isComicBook }) => $isComicBook && `
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 3px 3px 0 #000000;
+  `}
 `;
 
-export const Subtitle = styled(motion.h2)`
+export const Subtitle = styled(motion.h2)<{ $isComicBook: boolean }>`
   font-family: 'Comic Neue', sans-serif;
   font-size: 1.5rem;
   color: ${({ theme }) => theme.palette.text.primary};
   font-weight: bold;
+  ${({ $isComicBook }) => $isComicBook && `
+    font-weight: 700;
+    text-transform: uppercase;
+  `}
 `;
 
-export const HeroContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
-    position: relative;
-    overflow: hidden;
+export const ComicGrid = styled.div<{ $isComicBook: boolean }>`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  padding: 1rem;
+  ${({ $isComicBook }) => $isComicBook && `
+    gap: 20px;
+    background-color: #FFFFFF;
+    padding: 20px;
+    border: 5px solid #000000;
+    box-shadow: 10px 10px 0 rgba(0,0,0,0.8);
+  `}
 `;
 
-export const HeroImage = styled(motion.img)`
-    width: 300px;
-    height: auto;
-    border: 5px solid ${({ theme }) => theme.palette.secondary.main};;
-    border-radius: 50%;
-    box-shadow: 0 0 0 5px ${({ theme }) => theme.palette.primary.main};,
-                0 0 0 10px ${({ theme }) => theme.palette.secondary.main};;
+export const ComicPanel = styled.div<{ $isComicBook: boolean }>`
+  background-color: ${({ theme }) => theme.palette.background.paper};
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  ${({ $isComicBook }) => $isComicBook && `
+    border: 3px solid #000000;
+    box-shadow: 5px 5px 0 #000000;
+    transform: rotate(-1deg);
+  `}
 `;
 
-export const SpeechBubble = styled(motion.div)`
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    background-color: ${({ theme }) => theme.palette.background.default};;
-    color: ${({ theme }) => theme.palette.primary.main};;
-    padding: 1rem;
-    border-radius: 50% 50% 50% 0;
+export const PanelTitle = styled.h3<{ $isComicBook: boolean }>`
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: ${({ theme }) => theme.palette.primary.main};
+  ${({ $isComicBook }) => $isComicBook && `
     font-family: 'Bangers', cursive;
-    font-size: 2rem;
-    transform: rotate(15deg);
-    box-shadow: 5px 5px 0 ${({ theme }) => theme.palette.secondary.main};;
-
-    &::before {
-        content: '';
-        position: absolute;
-        left: 0;
-        bottom: -20px;
-        width: 0;
-        height: 0;
-        border-left: 20px solid ${({ theme }) => theme.palette.background.default};;
-        border-right: 20px solid transparent;
-        border-top: 20px solid transparent;
-        border-bottom: 20px solid transparent;
-    }
-`;
-
-export const CTAButton = styled(motion.button)`
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    background-color: ${({ theme }) => theme.palette.secondary.main};;
-    color: ${({ theme }) => theme.palette.background.default};;
-    border: none;
-    padding: 1rem 2rem;
-    font-family: 'Bangers', cursive;
-    font-size: 1.5rem;
-    cursor: pointer;
-    transform: rotate(-5deg);
-    box-shadow: 5px 5px 0 ${({ theme }) => theme.palette.primary.main};;
-    transition: all 0.3s ease;
-
-    &:hover {
-        transform: rotate(-5deg) scale(1.05);
-    }
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 0 #000000;
+  `}
 `;
